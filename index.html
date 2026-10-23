@@ -1,194 +1,489 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Fadeel Darkwa - Full-Stack Software Engineer Portfolio">
-    <title>Fadeel Darkwa | Full-Stack Engineer</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta name="description" content="Fadeel Darkwa — full-stack software engineer building fintech systems from cloud infrastructure to interface. Co-founder of Omika Labs." />
+<title>Fadeel Darkwa — Software Engineer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+<style>
+  :root {
+    --paper: #fafaf9;
+    --panel: #f2f1ec;
+    --ink: #17181a;
+    --ink-soft: #52555c;
+    --line: #e4e3dd;
+    --accent: #13674a;
+    --accent-soft: #e3efe9;
+    --display: "Space Grotesk", sans-serif;
+    --body: "IBM Plex Sans", sans-serif;
+    --mono: "IBM Plex Mono", monospace;
+    --maxw: 1080px;
+  }
+
+  * { box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--body);
+    font-size: 18px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  a { color: inherit; }
+
+  ::selection { background: var(--accent); color: var(--paper); }
+
+  .wrap {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 0 28px;
+  }
+
+  /* ---------- top bar ---------- */
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    background: color-mix(in srgb, var(--paper) 88%, transparent);
+    backdrop-filter: blur(8px);
+    border-bottom: 1px solid var(--line);
+  }
+  .topbar-inner {
+    max-width: var(--maxw);
+    margin: 0 auto;
+    padding: 16px 28px;
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 20px;
+  }
+  .brand {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 1.05rem;
+    letter-spacing: -0.01em;
+    text-decoration: none;
+  }
+  .brand .dot { color: var(--accent); }
+  .topnav {
+    display: flex;
+    gap: 26px;
+    font-size: 0.95rem;
+  }
+  .topnav a {
+    text-decoration: none;
+    color: var(--ink-soft);
+    transition: color 0.15s ease;
+  }
+  .topnav a:hover { color: var(--ink); }
+  .topnav a.repo { color: var(--accent); font-weight: 500; }
+
+  /* ---------- hero ---------- */
+  .hero {
+    padding: clamp(60px, 11vw, 128px) 0 clamp(48px, 7vw, 88px);
+    border-bottom: 1px solid var(--line);
+  }
+  .hero-eyebrow {
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    color: var(--accent);
+    margin: 0 0 22px;
+  }
+  .hero h1 {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: clamp(2.8rem, 9vw, 6.4rem);
+    line-height: 0.98;
+    letter-spacing: -0.03em;
+    margin: 0;
+  }
+  .hero .role {
+    font-family: var(--display);
+    font-weight: 400;
+    font-size: clamp(1.3rem, 3.4vw, 2rem);
+    letter-spacing: -0.01em;
+    color: var(--ink-soft);
+    margin: 18px 0 0;
+    max-width: 22ch;
+  }
+  .hero .role b { color: var(--ink); font-weight: 600; }
+
+  /* equity curve */
+  .chartblock {
+    margin-top: clamp(34px, 5vw, 56px);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    background: #fff;
+    overflow: hidden;
+  }
+  .chart-cap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid var(--line);
+    font-family: var(--mono);
+    font-size: 0.74rem;
+    color: var(--ink-soft);
+  }
+  .chart-cap .up { color: var(--accent); }
+  svg.equity { display: block; width: 100%; height: auto; }
+  .grid-line { stroke: var(--line); stroke-width: 1; }
+  .equity-path {
+    fill: none;
+    stroke: var(--accent);
+    stroke-width: 2.5;
+    stroke-linejoin: round;
+    stroke-linecap: round;
+  }
+  .equity-fill { fill: url(#fade); opacity: 0.5; }
+
+  /* ---------- generic section ---------- */
+  .block { padding: clamp(56px, 8vw, 104px) 0; border-bottom: 1px solid var(--line); }
+  .block-head {
+    font-family: var(--mono);
+    font-size: 0.82rem;
+    color: var(--accent);
+    margin: 0 0 8px;
+  }
+  .block-title {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: clamp(1.7rem, 4vw, 2.5rem);
+    letter-spacing: -0.02em;
+    margin: 0 0 36px;
+  }
+
+  .lede {
+    font-size: clamp(1.15rem, 2.4vw, 1.4rem);
+    line-height: 1.5;
+    max-width: 30ch;
+    margin: 0;
+    font-family: var(--display);
+    font-weight: 400;
+  }
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: clamp(32px, 6vw, 72px);
+    align-items: start;
+  }
+  .about-body p { margin: 0 0 18px; max-width: 58ch; }
+  .about-body p:last-child { margin-bottom: 0; }
+  .facts { margin: 0; display: grid; gap: 18px; }
+  .fact { border-top: 1px solid var(--line); padding-top: 14px; }
+  .fact dt { font-family: var(--mono); font-size: 0.74rem; color: var(--ink-soft); margin-bottom: 4px; }
+  .fact dd { margin: 0; font-family: var(--display); font-weight: 500; font-size: 1.05rem; }
+
+  /* ---------- work ---------- */
+  .work-item {
+    display: grid;
+    grid-template-columns: 140px 1fr;
+    gap: clamp(20px, 4vw, 48px);
+    padding: 34px 0;
+    border-top: 1px solid var(--line);
+  }
+  .work-item:last-child { border-bottom: 1px solid var(--line); }
+  .work-meta { font-family: var(--mono); font-size: 0.78rem; color: var(--ink-soft); }
+  .work-meta .kind { color: var(--accent); display: block; margin-bottom: 6px; }
+  .work-main h3 {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: 1.5rem;
+    letter-spacing: -0.01em;
+    margin: 0 0 10px;
+  }
+  .work-main p { margin: 0 0 16px; max-width: 62ch; color: var(--ink); }
+  .work-main .edge { color: var(--ink-soft); }
+  .stack-row { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 18px; }
+  .chip {
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    color: var(--ink-soft);
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    padding: 4px 9px;
+  }
+  .work-link {
+    font-family: var(--display);
+    font-weight: 500;
+    font-size: 0.95rem;
+    text-decoration: none;
+    color: var(--accent);
+    border-bottom: 1.5px solid var(--accent-soft);
+    padding-bottom: 1px;
+    transition: border-color 0.15s ease;
+  }
+  .work-link:hover { border-color: var(--accent); }
+
+  /* ---------- stack ---------- */
+  .stack-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: clamp(28px, 5vw, 56px);
+  }
+  .stack-col h4 {
+    font-family: var(--mono);
+    font-size: 0.78rem;
+    color: var(--ink-soft);
+    margin: 0 0 14px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--line);
+    font-weight: 500;
+  }
+  .stack-col ul { list-style: none; margin: 0; padding: 0; }
+  .stack-col li {
+    font-family: var(--display);
+    font-size: 1.02rem;
+    padding: 5px 0;
+  }
+
+  /* ---------- contact ---------- */
+  .contact-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    gap: 28px;
+  }
+  .contact-flex .big {
+    font-family: var(--display);
+    font-weight: 600;
+    font-size: clamp(1.8rem, 5vw, 3.2rem);
+    letter-spacing: -0.02em;
+    margin: 0;
+    line-height: 1.05;
+  }
+  .contact-flex .big a { text-decoration: none; border-bottom: 2px solid var(--accent-soft); }
+  .contact-flex .big a:hover { border-color: var(--accent); }
+  .contact-links { display: flex; gap: 10px; }
+  .iconlink {
+    width: 44px; height: 44px;
+    display: grid; place-items: center;
+    border: 1px solid var(--line);
+    border-radius: 2px;
+    color: var(--ink);
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .iconlink:hover { background: var(--ink); color: var(--paper); }
+  .iconlink svg { width: 19px; height: 19px; }
+
+  footer { padding: 30px 0; }
+  .foot-inner {
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+    font-family: var(--mono); font-size: 0.76rem; color: var(--ink-soft);
+  }
+
+  /* ---------- focus + motion ---------- */
+  a:focus-visible, .iconlink:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .equity-path { stroke-dasharray: var(--len); stroke-dashoffset: var(--len); animation: draw 1.8s cubic-bezier(.2,.7,.2,1) 0.3s forwards; }
+    .equity-fill { opacity: 0; animation: fadein 1s ease 1.6s forwards; }
+    @keyframes draw { to { stroke-dashoffset: 0; } }
+    @keyframes fadein { to { opacity: 0.5; } }
+  }
+
+  /* ---------- responsive ---------- */
+  @media (max-width: 760px) {
+    body { font-size: 17px; }
+    .topnav { gap: 18px; font-size: 0.9rem; }
+    .topnav a.hide-sm { display: none; }
+    .about-grid { grid-template-columns: 1fr; }
+    .work-item { grid-template-columns: 1fr; gap: 12px; }
+    .stack-grid { grid-template-columns: 1fr; gap: 28px; }
+  }
+</style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav class="navbar">
-        <div class="nav-container">
-            <a href="#home" class="nav-logo">FD</a>
-            <ul class="nav-menu">
-                <li><a href="#about" class="nav-link">About</a></li>
-                <li><a href="#skills" class="nav-link">Skills</a></li>
-                <li><a href="#projects" class="nav-link">Projects</a></li>
-                <li><a href="#contact" class="nav-link">Contact</a></li>
-            </ul>
-            <div class="hamburger">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </div>
-        </div>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <a href="#top" class="brand">Fadeel Darkwa<span class="dot">.</span></a>
+    <nav class="topnav">
+      <a href="#work">Work</a>
+      <a href="#stack" class="hide-sm">Stack</a>
+      <a href="#contact">Contact</a>
+      <a href="https://github.com/fadeel7" target="_blank" rel="noopener" class="repo">GitHub</a>
     </nav>
+  </div>
+</header>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-content">
-            <h1 class="hero-title">Hi, I'm <span class="highlight">Fadeel Darkwa</span></h1>
-            <p class="hero-subtitle">Full-Stack Software Engineer</p>
-            <p class="hero-description">Building end-to-end solutions from database to deployment</p>
-            <div class="hero-buttons">
-                <a href="#projects" class="btn btn-primary">View Projects</a>
-                <a href="#contact" class="btn btn-secondary">Get In Touch</a>
-            </div>
-            <div class="social-links">
-                <a href="https://github.com/fadeel7" target="_blank" aria-label="GitHub"><i class="fab fa-github"></i></a>
-                <a href="https://gh.linkedin.com/in/fadeel-darkwa-709b08230" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
-                <a href="mailto:fadeeldarkwa19@gmail.com" aria-label="Email"><i class="fas fa-envelope"></i></a>
-            </div>
-        </div>
-        <div class="scroll-down">
-            <a href="#about"><i class="fas fa-chevron-down"></i></a>
-        </div>
-    </section>
+<main id="top">
 
-    <!-- About Section -->
-    <section id="about" class="about">
-        <div class="container">
-            <h2 class="section-title">About Me</h2>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>On a mission to become a full-stack engineer who builds complete solutions from database to deployment. Learning by doing, shipping by iterating, and growing through every line of code written.</p>
-                    <p><strong>Current Focus:</strong> Mastering the full spectrum—frontend polish, backend logic, cloud infrastructure, and everything in between.</p>
-                    <div class="about-stats">
-                        <div class="stat">
-                            <h3>10+</h3>
-                            <p>Technologies</p>
-                        </div>
-                        <div class="stat">
-                            <h3>Multiple</h3>
-                            <p>Projects</p>
-                        </div>
-                        <div class="stat">
-                            <h3>Always</h3>
-                            <p>Learning</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="wrap">
+      <p class="hero-eyebrow">Full-stack engineer · fintech · co-founder of Omika Labs</p>
+      <h1>Fadeel Darkwa</h1>
+      <p class="role">I build financial software from the <b>infrastructure</b> up to the <b>interface</b>.</p>
 
-    <!-- Skills Section -->
-    <section id="skills" class="skills">
-        <div class="container">
-            <h2 class="section-title">Tech Stack</h2>
-            <div class="skills-grid">
-                <div class="skill-category">
-                    <h3>Cloud & Backend</h3>
-                    <div class="skill-items">
-                        <span class="skill-tag"><i class="fab fa-aws"></i> AWS</span>
-                        <span class="skill-tag"><i class="fab fa-python"></i> Python</span>
-                        <span class="skill-tag"><i class="fab fa-node-js"></i> Node.js</span>
-                        <span class="skill-tag"><i class="fab fa-java"></i> Java</span>
-                        <span class="skill-tag"><i class="fas fa-cloud"></i> Lambda</span>
-                        <span class="skill-tag"><i class="fas fa-database"></i> S3</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3>Frontend</h3>
-                    <div class="skill-items">
-                        <span class="skill-tag"><i class="fab fa-js"></i> JavaScript</span>
-                        <span class="skill-tag"><i class="fab fa-react"></i> React</span>
-                        <span class="skill-tag"><i class="fab fa-html5"></i> HTML5</span>
-                        <span class="skill-tag"><i class="fab fa-css3-alt"></i> CSS3</span>
-                        <span class="skill-tag"><i class="fab fa-js"></i> TypeScript</span>
-                    </div>
-                </div>
-                <div class="skill-category">
-                    <h3>DevOps & Tools</h3>
-                    <div class="skill-items">
-                        <span class="skill-tag"><i class="fab fa-git-alt"></i> Git</span>
-                        <span class="skill-tag"><i class="fab fa-github"></i> GitHub</span>
-                        <span class="skill-tag"><i class="fab fa-linux"></i> Linux</span>
-                        <span class="skill-tag"><i class="fab fa-docker"></i> Docker</span>
-                        <span class="skill-tag"><i class="fas fa-terminal"></i> Bash</span>
-                    </div>
-                </div>
-            </div>
+      <div class="chartblock" aria-hidden="true">
+        <div class="chart-cap">
+          <span>modeling markets · AI applied to finance</span>
+          <span class="up">▲ building</span>
         </div>
-    </section>
+        <svg class="equity" viewBox="0 0 1000 300" preserveAspectRatio="none" role="img">
+          <defs>
+            <linearGradient id="fade" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#13674a" stop-opacity="0.22" />
+              <stop offset="100%" stop-color="#13674a" stop-opacity="0" />
+            </linearGradient>
+          </defs>
+          <line class="grid-line" x1="0" y1="75" x2="1000" y2="75" />
+          <line class="grid-line" x1="0" y1="150" x2="1000" y2="150" />
+          <line class="grid-line" x1="0" y1="225" x2="1000" y2="225" />
+          <path class="equity-fill" d="M0,250 L55,246 L110,255 L165,232 L220,240 L275,210 L330,222 L385,188 L440,200 L495,165 L550,176 L605,140 L660,150 L715,112 L770,124 L825,86 L880,96 L935,58 L1000,66 L1000,300 L0,300 Z" />
+          <path class="equity-path" d="M0,250 L55,246 L110,255 L165,232 L220,240 L275,210 L330,222 L385,188 L440,200 L495,165 L550,176 L605,140 L660,150 L715,112 L770,124 L825,86 L880,96 L935,58 L1000,66" />
+        </svg>
+      </div>
+    </div>
+  </section>
 
-    <!-- Projects Section -->
-    <section id="projects" class="projects">
-        <div class="container">
-            <h2 class="section-title">Featured Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-icon">
-                        <i class="fas fa-server"></i>
-                    </div>
-                    <h3>AWS S3 Automated Backup System</h3>
-                    <p>Event-driven disaster recovery solution with serverless architecture. Automatically backs up files across AWS regions using Lambda, S3, and SNS.</p>
-                    <div class="project-tags">
-                        <span>AWS Lambda</span>
-                        <span>S3</span>
-                        <span>Python</span>
-                        <span>SNS</span>
-                    </div>
-                    <a href="https://github.com/fadeel7/aws-s3-automated-backup-system" target="_blank" class="project-link">View Project <i class="fas fa-external-link-alt"></i></a>
-                </div>
-                
-                <div class="project-card">
-                    <div class="project-icon">
-                        <i class="fas fa-code"></i>
-                    </div>
-                    <h3>More Projects Coming Soon</h3>
-                    <p>Currently building new full-stack applications. Check my GitHub for the latest updates and repositories.</p>
-                    <div class="project-tags">
-                        <span>React</span>
-                        <span>Node.js</span>
-                        <span>AWS</span>
-                    </div>
-                    <a href="https://github.com/fadeel7" target="_blank" class="project-link">View GitHub <i class="fas fa-external-link-alt"></i></a>
-                </div>
-            </div>
+  <!-- ABOUT -->
+  <section class="block" id="about">
+    <div class="wrap">
+      <div class="about-grid">
+        <div>
+          <p class="block-head">// positioning</p>
+          <p class="lede">I build things that hold up in production, not just in a demo.</p>
         </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2 class="section-title">Let's Connect</h2>
-            <p class="contact-subtitle">Always open to conversations about software engineering, architecture, or that bug you've been debugging for three hours.</p>
-            <div class="contact-grid">
-                <a href="mailto:fadeeldarkwa19@gmail.com" class="contact-card">
-                    <i class="fas fa-envelope"></i>
-                    <h3>Email</h3>
-                    <p>fadeeldarkwa19@gmail.com</p>
-                </a>
-                <a href="https://gh.linkedin.com/in/fadeel-darkwa-709b08230" target="_blank" class="contact-card">
-                    <i class="fab fa-linkedin"></i>
-                    <h3>LinkedIn</h3>
-                    <p>Connect with me</p>
-                </a>
-                <a href="https://github.com/fadeel7" target="_blank" class="contact-card">
-                    <i class="fab fa-github"></i>
-                    <h3>GitHub</h3>
-                    <p>Check out my code</p>
-                </a>
-            </div>
-            <div class="location-info">
-                <i class="fas fa-map-marker-alt"></i>
-                <p>Based in North Carolina | Open to remote opportunities</p>
-            </div>
+        <div class="about-body">
+          <p>I ship full-stack applications end to end — React and TypeScript on the front, Node and Python on the back, running on AWS. My background is in infrastructure and DevOps, so I think about how systems behave under real load and how they fail, not only how they work on the happy path.</p>
+          <p>Right now my work centers on fintech: tools that make financial decisions and wealth-building accessible to people the industry usually overlooks. That's the problem I'm building toward at Omika Labs, and the direction I'm taking my engineering.</p>
+          <dl class="facts">
+            <div class="fact"><dt>Focus</dt><dd>Full-stack · fintech</dd></div>
+            <div class="fact"><dt>Building</dt><dd>Omika Labs — co-founder</dd></div>
+            <div class="fact"><dt>Based</dt><dd>United States · open to remote</dd></div>
+          </dl>
         </div>
-    </section>
+      </div>
+    </div>
+  </section>
 
-    <!-- Footer -->
-    <footer class="footer">
-        <div class="container">
-            <p>&copy; 2026 Fadeel Darkwa. Built with passion and code.</p>
-            <p class="footer-quote">"Code is poetry written in logic."</p>
+  <!-- WORK -->
+  <section class="block" id="work">
+    <div class="wrap">
+      <p class="block-head">// selected work</p>
+      <h2 class="block-title">Things I've built</h2>
+
+      <article class="work-item">
+        <div class="work-meta"><span class="kind">product</span>2025 — now</div>
+        <div class="work-main">
+          <h3>Omika Labs</h3>
+          <p>A software company I co-founded, building financial and productivity tools for small teams, solo operators, and first-generation wealth builders — people handed software that was designed for someone else entirely.</p>
+          <p class="edge">Product direction, full-stack build, and the infrastructure underneath it.</p>
+          <div class="stack-row">
+            <span class="chip">React</span><span class="chip">Node</span><span class="chip">PostgreSQL</span><span class="chip">AWS</span>
+          </div>
         </div>
-    </footer>
+      </article>
 
-    <script src="script.js"></script>
+      <article class="work-item">
+        <div class="work-meta"><span class="kind">backend</span>project</div>
+        <div class="work-main">
+          <h3>Subscription Billing Service</h3>
+          <p>A full-stack subscription system on Stripe Checkout and webhooks. The decision that mattered: never trust the browser's success redirect as proof of payment.</p>
+          <p class="edge">Access is granted only on a signature-verified webhook, and the handler is idempotent — so a retried event can't double-grant. The subtle part was mounting raw-body parsing on the webhook route alone while the rest of the app reads JSON.</p>
+          <div class="stack-row">
+            <span class="chip">Node</span><span class="chip">Express</span><span class="chip">Stripe</span><span class="chip">Webhooks</span>
+          </div>
+          <a class="work-link" href="https://github.com/fadeel7" target="_blank" rel="noopener">Read the code →</a>
+        </div>
+      </article>
+
+      <article class="work-item">
+        <div class="work-meta"><span class="kind">infra</span>project</div>
+        <div class="work-main">
+          <h3>AWS Automated Backup System</h3>
+          <p>An event-driven disaster-recovery setup on AWS — files backed up across regions with Lambda, S3, and SNS, triggered automatically rather than on a manual schedule.</p>
+          <div class="stack-row">
+            <span class="chip">AWS Lambda</span><span class="chip">S3</span><span class="chip">SNS</span><span class="chip">Python</span>
+          </div>
+          <a class="work-link" href="https://github.com/fadeel7/aws-s3-automated-backup-system" target="_blank" rel="noopener">Read the code →</a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- STACK -->
+  <section class="block" id="stack">
+    <div class="wrap">
+      <p class="block-head">// toolkit</p>
+      <h2 class="block-title">What I work in</h2>
+      <div class="stack-grid">
+        <div class="stack-col">
+          <h4>languages</h4>
+          <ul>
+            <li>TypeScript</li><li>JavaScript</li><li>Python</li><li>Java</li><li>SQL</li>
+          </ul>
+        </div>
+        <div class="stack-col">
+          <h4>frontend &amp; backend</h4>
+          <ul>
+            <li>React</li><li>Node · Express</li><li>Flask</li><li>REST APIs</li><li>PostgreSQL · MongoDB · Redis</li>
+          </ul>
+        </div>
+        <div class="stack-col">
+          <h4>cloud &amp; devops</h4>
+          <ul>
+            <li>AWS — EC2, S3, Lambda, IAM</li><li>CI/CD pipelines</li><li>Docker</li><li>Datadog</li><li>Linux · Git</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section class="block" id="contact" style="border-bottom:none;">
+    <div class="wrap">
+      <p class="block-head">// contact</p>
+      <div class="contact-flex">
+        <p class="big">Let's talk.<br /><a href="mailto:fadeeldarkwa19@gmail.com">fadeeldarkwa19@gmail.com</a></p>
+        <div class="contact-links">
+          <a class="iconlink" href="https://github.com/fadeel7" target="_blank" rel="noopener" aria-label="GitHub">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 .5C5.37.5 0 5.87 0 12.5c0 5.3 3.44 9.8 8.21 11.39.6.11.82-.26.82-.58 0-.29-.01-1.04-.02-2.05-3.34.73-4.04-1.61-4.04-1.61-.55-1.39-1.33-1.76-1.33-1.76-1.09-.74.08-.73.08-.73 1.2.09 1.83 1.24 1.83 1.24 1.07 1.83 2.81 1.3 3.5.99.11-.78.42-1.3.76-1.6-2.67-.3-5.47-1.33-5.47-5.93 0-1.31.47-2.38 1.24-3.22-.13-.3-.54-1.52.12-3.18 0 0 1.01-.32 3.3 1.23a11.5 11.5 0 016.01 0c2.29-1.55 3.3-1.23 3.3-1.23.66 1.66.25 2.88.12 3.18.77.84 1.23 1.91 1.23 3.22 0 4.61-2.8 5.63-5.48 5.92.43.37.81 1.1.81 2.22 0 1.61-.01 2.9-.01 3.29 0 .32.21.7.82.58A12 12 0 0024 12.5C24 5.87 18.63.5 12 .5z"/></svg>
+          </a>
+          <a class="iconlink" href="https://gh.linkedin.com/in/fadeel-darkwa-709b08230" target="_blank" rel="noopener" aria-label="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M20.45 20.45h-3.56v-5.57c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.94v5.67H9.35V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.6 0 4.27 2.37 4.27 5.46v6.28zM5.34 7.43a2.07 2.07 0 110-4.14 2.07 2.07 0 010 4.14zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.78C.8 0 0 .78 0 1.74v20.52C0 23.22.8 24 1.78 24h20.44c.98 0 1.78-.78 1.78-1.74V1.74C24 .78 23.2 0 22.22 0z"/></svg>
+          </a>
+          <a class="iconlink" href="mailto:fadeeldarkwa19@gmail.com" aria-label="Email">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="1.5"/><path d="M3 6l9 7 9-7"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap foot-inner">
+    <span>© 2026 Fadeel Darkwa</span>
+    <span>Built and maintained by hand.</span>
+  </div>
+</footer>
+
+<script>
+  // set the dash length to the real path length so the draw animation is exact
+  (function () {
+    var path = document.querySelector(".equity-path");
+    if (!path) return;
+    try {
+      var len = path.getTotalLength();
+      path.style.setProperty("--len", len);
+    } catch (e) { /* no-op */ }
+  })();
+</script>
 </body>
 </html>
